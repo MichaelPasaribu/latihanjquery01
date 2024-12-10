@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Konversi Celcius Fahrenheit</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <style>
+    .jarak{
+      padding-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  
+  <div>
+    <h3>Konversi Suhu Celcius Fahrenheit</h3>
+
+    <select class="form-select" id="pilihan">
+      <option value="pil" disabled>Silahkan Pilih Opsi</option>
+      <option value="ctof">Celcius -> Fahrenheit</option>
+      <option value="ftoc">Fahrenheit -> Celcius</option>
+    </select>
+
+    <div id="c2f">
+      <label class="form-label">Nilai Derajat Celcius</label>
+      <input type="text" id="txC" class="form-control">
+    </div>
+
+    <div id="f2c">
+      <label class="form-label">Nilai Fahrenheit</label>
+      <input type="text" id="txF" class="form-control">
+    </div>
+
+    <div class="jarak">
+      <span id="txHasil"></span>
+    </div>
+
+    <div class="jarak">
+      <button id="cmdConvert" class="btn btn-warning">Konversi Nilai</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script>
+    //definisi script Konversi C=>F, F=>C
+    //Dari C->F = (C × 9/5) + 32
+    //Dari F-> = (F × 5/9) - 32
+    $(function(){
+      var pil=""
+      var txHASIL=""
+
+      $("select").on('change',function(){
+        pil = $("select").val()
+        if(pil=="ctof"){
+          $("#txC").prop("disabled",false)
+          $("#txF").prop("disabled",true)
+        }else{
+          $("#txC").prop("disabled",true)
+          $("#txF").prop("disabled",false)
+        }
+
+      })
+      $("#cmdConvert").on("click",function(){
+        let nC = 0
+        let nF = 0
+        if(pil=="ctof"){
+          nC = $("#txC").val()
+          nF = (nC*9/5)+32
+          txHASIL = "<h3>Konversi Nilai Celcius ke Fahrenheit</h3>"
+          txHASIL += "°F = (°C X 9/5) + 32<br>"
+          txHASIL += "°F = ("+nC+" X 9/5) + 32<br>"
+          txHASIL =+ "°F = "+nF+"°"
+          $("#txF").val(nF)
+          $("#txHasil").html(txHasil)
+        }
+        if(pil=="ftoc"){
+          nF = $("#txF").val()
+          nC = (nF*5/9)-32
+          txHASIL = "<h3>Konversi Nilai Fahrenheit ke Celcius</h3>"
+          txHASIL += "°C = (°C X 5/9) - 32<br>"
+          txHASIL += "°C = ("+nF+" X 5/9) - 32<br>"
+          txHASIL =+ "°C = "+nC+"°"
+          $("#txC").val(nC)
+          $("#txHasil").html(txHasil)
+        }
+
+      })
+    })
+</script>
+</body>
+</html>
